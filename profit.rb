@@ -15,17 +15,13 @@
 # in this case, return -1  (bought at 7, sold at 6)
 
 def get_max_profit(stock_prices_yesterday)
-  # your code goes here
-  # min price set to first value
-  # max profit = next value - first price
-  # iterate thru the stock prices in order and track idx
-  #   skip first element
-  #   potential_profit = current value - min price
-  #   if potential profit > max profit
-  #     max profit = potential profit
-  #   if current val < min price
-  #     min price = current val
-  # return max_profit
+  max_profit = nil
+  stock_prices_yesterday.each_with_index do |buy_price, idx|
+    stock_prices_yesterday[idx + 1..stock_prices_yesterday.length].each do |sell_price|
+      max_profit = sell_price - buy_price if max_profit.nil? || sell_price - buy_price > max_profit
+    end
+  end
+  max_profit
 end
 
 
